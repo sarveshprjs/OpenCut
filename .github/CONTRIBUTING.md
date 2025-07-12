@@ -1,145 +1,192 @@
-# Contributing to OpenCut
+✨ Contributing to OpenCut
+Thank you for your interest in contributing to OpenCut — a free and open-source video editor built for web, desktop, and mobile.
 
-Thank you for your interest in contributing to OpenCut! This document provides guidelines and instructions for contributing.
+This guide will walk you through how to get started, set up the project, and make meaningful contributions. Whether you're fixing a typo or adding new features, you're welcome here! 💙
 
-## Getting Started
+🚀 Getting Started
+Fork the repository to your GitHub account.
 
-1. Fork the repository
-2. Clone your fork locally
-3. Navigate to the web app directory: `cd apps/web`
-4. Install dependencies: `bun install`
-5. Start the development server: `bun run dev`
+Clone your fork locally.
 
-> **Note:** If you see an error like `Unsupported URL Type "workspace:*"` when running `npm install`, you have two options:
->
-> 1. Upgrade to a recent npm version (v9 or later), which has full workspace protocol support.
-> 2. Use an alternative package manager such as **bun** or **pnpm**.
+Navigate to the web app directory:
 
-## Development Setup
+bash
+Copy
+Edit
+cd apps/web
+Install dependencies:
 
-### Prerequisites
+bash
+Copy
+Edit
+bun install
+Start the development server:
 
-- Node.js 18+
-- Bun (latest version)
-- Docker (for local database)
+bash
+Copy
+Edit
+bun run dev
+💡 Note: If you get an error like Unsupported URL Type "workspace:*" when running npm install, you have two options:
 
-### Local Development
+Upgrade to npm v9+, which supports workspace protocols.
 
-1. Start the database and Redis services:
+Use an alternative package manager like bun or pnpm.
 
-   ```bash
-   # From project root
-   docker-compose up -d
-   ```
+🧰 Development Setup
+✅ Prerequisites
+Node.js 18+
 
-2. Navigate to the web app directory:
+Bun (latest version)
 
-   ```bash
-   cd apps/web
-   ```
+Docker (for running Postgres & Redis locally)
 
-3. Copy `.env.example` to `.env.local`:
+⚙️ Local Development
+Start backend services using Docker:
 
-   ```bash
-   # Unix/Linux/Mac
-   cp .env.example .env.local
+bash
+Copy
+Edit
+# From the project root
+docker-compose up -d
+Navigate to the web app directory:
 
-   # Windows Command Prompt
-   copy .env.example .env.local
+bash
+Copy
+Edit
+cd apps/web
+Copy environment variables file:
 
-   # Windows PowerShell
-   Copy-Item .env.example .env.local
-   ```
+bash
+Copy
+Edit
+# Unix/Linux/Mac
+cp .env.example .env.local
 
-4. Configure required environment variables in `.env.local`:
+# Windows (CMD)
+copy .env.example .env.local
 
-   **Required Variables:**
+# Windows (PowerShell)
+Copy-Item .env.example .env.local
+Edit .env.local and update the required variables:
 
-   ```bash
-   # Database (matches docker-compose.yaml)
-   DATABASE_URL="postgresql://opencut:opencutthegoat@localhost:5432/opencut"
+env
+Copy
+Edit
+DATABASE_URL="postgresql://opencut:opencutthegoat@localhost:5432/opencut"
+BETTER_AUTH_SECRET="your-generated-secret-here"
+BETTER_AUTH_URL="http://localhost:3000"
+UPSTASH_REDIS_REST_URL="http://localhost:8079"
+UPSTASH_REDIS_REST_TOKEN="example_token"
+NODE_ENV="development"
+Generate a secure auth secret:
 
-   # Generate a secure secret for Better Auth
-   BETTER_AUTH_SECRET="your-generated-secret-here"
-   BETTER_AUTH_URL="http://localhost:3000"
+bash
+Copy
+Edit
+# Unix/Linux/Mac
+openssl rand -base64 32
 
-   # Redis (matches docker-compose.yaml)
-   UPSTASH_REDIS_REST_URL="http://localhost:8079"
-   UPSTASH_REDIS_REST_TOKEN="example_token"
+# Windows (PowerShell)
+[System.Web.Security.Membership]::GeneratePassword(32, 0)
 
-   # Development
-   NODE_ENV="development"
-   ```
+# Node.js (cross-platform)
+node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
+Or use an online generator: https://generate-secret.vercel.app/32
 
-   **Generate BETTER_AUTH_SECRET:**
+Run database migrations:
 
-   ```bash
-   # Unix/Linux/Mac
-   openssl rand -base64 32
+bash
+Copy
+Edit
+bun run db:migrate
+Start the development server:
 
-   # Windows PowerShell (simple method)
-   [System.Web.Security.Membership]::GeneratePassword(32, 0)
+bash
+Copy
+Edit
+bun run dev
+💡 If you're using Windows and face issues with paths, try using Git Bash or WSL for better compatibility.
 
-   # Cross-platform (using Node.js)
-   node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
+🤝 How to Contribute
+🐞 Reporting Bugs
+Use the bug report template
 
-   # Or use an online generator: https://generate-secret.vercel.app/32
-   ```
+Include clear steps to reproduce
 
-   **Optional Variables (for Google OAuth):**
+Provide screenshots or error logs if helpful
 
-   ```bash
-   # Only needed if you want to test Google login
-   GOOGLE_CLIENT_ID="your-google-client-id"
-   GOOGLE_CLIENT_SECRET="your-google-client-secret"
-   ```
+💡 Suggesting Features
+Use the feature request template
 
-5. Run database migrations: `bun run db:migrate`
-6. Start the development server: `bun run dev`
+Describe the use case clearly
 
-## How to Contribute
+Share any relevant implementation ideas
 
-### Reporting Bugs
+👨‍💻 Code Contributions
+Create a new branch:
 
-- Use the bug report template
-- Include steps to reproduce
-- Provide screenshots if applicable
+bash
+Copy
+Edit
+git checkout -b feature/your-feature-name
+Make your changes.
 
-### Suggesting Features
+Run the linter:
 
-- Use the feature request template
-- Explain the use case
-- Consider implementation details
+bash
+Copy
+Edit
+bun run lint
+Format the code:
 
-### Code Contributions
+bash
+Copy
+Edit
+bunx biome format --write .
+Commit with a clear message:
 
-1. Create a new branch: `git checkout -b feature/your-feature-name`
-2. Make your changes
-3. Navigate to the web app directory: `cd apps/web`
-4. Run the linter: `bun run lint`
-5. Format your code: `bunx biome format --write .`
-6. Commit your changes with a descriptive message
-7. Push to your fork and create a pull request
+bash
+Copy
+Edit
+git commit -m "feat: add new video trimming feature"
+Push to your fork and open a pull request.
 
-## Code Style
+🎨 Code Style
+We use Biome for formatting and linting.
 
-- We use Biome for code formatting and linting
-- Run `bunx biome format --write .` from the `apps/web` directory to format code
-- Run `bun run lint` from the `apps/web` directory to check for linting issues
-- Follow the existing code patterns
+From the apps/web directory, run:
 
-## Pull Request Process
+bash
+Copy
+Edit
+bunx biome format --write .
+bun run lint
+Follow the existing code patterns and structure.
 
-1. Fill out the pull request template completely
-2. Link any related issues
-3. Ensure CI passes
-4. Request review from maintainers
-5. Address any feedback
+Keep functions modular and components reusable.
 
-## Community
+🔁 Pull Request Process
+Fill out the pull request template completely.
 
-- Be respectful and inclusive
-- Follow our Code of Conduct
-- Help others in discussions and issues
+Link to any related issues (e.g., Closes #123).
 
-Thank you for contributing!
+Make sure CI passes.
+
+Request a review from a maintainer.
+
+Address any feedback respectfully and promptly.
+
+🌍 Community Guidelines
+We believe in a friendly, inclusive, and supportive community. 💬
+
+Be kind, respectful, and open to learning.
+
+Follow our Code of Conduct.
+
+Help others in issues or discussions if you can.
+
+🙏 Thank You!
+Your contribution — big or small — means a lot to the OpenCut project. 💖
+Whether you're fixing typos, building features, or helping others, you're making this better for everyone.
+
+Welcome to the team! 🚀

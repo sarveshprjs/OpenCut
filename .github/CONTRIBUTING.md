@@ -1,27 +1,40 @@
-# Contributing to OpenCut
+# ✨ Contributing to OpenCut
 
-Thank you for your interest in contributing to OpenCut! This document provides guidelines and instructions for contributing.
+Thank you for your interest in contributing to **OpenCut** — a free, open-source video editor for web, desktop, and mobile!
 
-## Getting Started
+This guide provides everything you need to get started, set up the project locally, and contribute confidently — even as a beginner. 🎉
 
-1. Fork the repository
-2. Clone your fork locally
-3. Navigate to the web app directory: `cd apps/web`
+---
+
+## 🚀 Getting Started
+
+1. **Fork** the repository to your GitHub account
+2. **Clone** your fork locally
+3. Navigate to the web app directory:
+
+   ```bash
+   cd apps/web
+
 4. Install dependencies: `bun install`
 5. Start the development server: `bun run dev`
+Note: If you see an error like Unsupported URL Type "workspace:*" when using npm install, either:
+
+Upgrade to npm v9 or higher (supports workspace protocol), or
+
+Use an alternative like bun or pnpm.
 
 > **Note:** If you see an error like `Unsupported URL Type "workspace:*"` when running `npm install`, you have two options:
 >
 > 1. Upgrade to a recent npm version (v9 or later), which has full workspace protocol support.
 > 2. Use an alternative package manager such as **bun** or **pnpm**.
 
-## Development Setup
+🛠 Development Setup
+✅ Prerequisites
+Node.js 18+
 
-### Prerequisites
+Bun (latest version)
 
-- Node.js 18+
-- Bun (latest version)
-- Docker (for local database)
+Docker + Docker Compose
 
 ### Local Development
 
@@ -97,21 +110,19 @@ Thank you for your interest in contributing to OpenCut! This document provides g
 5. Run database migrations: `bun run db:migrate`
 6. Start the development server: `bun run dev`
 
-## How to Contribute
+🤝 How to Contribute
+🐞 Report Bugs
+Use the bug report template
 
-### Reporting Bugs
+Include steps to reproduce
 
-- Use the bug report template
-- Include steps to reproduce
-- Provide screenshots if applicable
+Add screenshots if possible
 
-### Suggesting Features
+💡 Suggest Features
+Use the feature request template
 
-- Use the feature request template
-- Explain the use case
-- Consider implementation details
-
-### Code Contributions
+Clearly describe the use case and value
+👨‍💻 Code Contributions
 
 1. Create a new branch: `git checkout -b feature/your-feature-name`
 2. Make your changes
@@ -121,25 +132,26 @@ Thank you for your interest in contributing to OpenCut! This document provides g
 6. Commit your changes with a descriptive message
 7. Push to your fork and create a pull request
 
-## Code Style
+🎨 Code Style
 
 - We use Biome for code formatting and linting
 - Run `bunx biome format --write .` from the `apps/web` directory to format code
 - Run `bun run lint` from the `apps/web` directory to check for linting issues
 - Follow the existing code patterns
 
-## Pull Request Process
+📦 Pull Request Process
+Fill out the PR template clearly
 
-1. Fill out the pull request template completely
-2. Link any related issues
-3. Ensure CI passes
-4. Request review from maintainers
-5. Address any feedback
+Link to any related issues (Closes #123)
 
-## Community
+Ensure CI checks pass
 
-- Be respectful and inclusive
-- Follow our Code of Conduct
-- Help others in discussions and issues
+Request a review
 
-Thank you for contributing!
+Address all feedback kindly
+🌟 Community Guidelines
+Be respectful and helpful
+
+Follow the Code of Conduct
+
+Support others in issues & discussions
